@@ -9,7 +9,7 @@
             <li><a href="/">Explore</a></li>
             <li><a href="">Search</a></li>
             <li><a href="/animes/new">Review</a></li>
-            <li><a href="">Profile</a></li>
+            <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
             <li><a href="/sessions/new">Log-in</a></li>
             <li><a href="/users/new">Sign-up</a></li>
         </ul>
@@ -19,7 +19,7 @@
 
 <div class="loginplaceholder">
     <% if logged_in? %>
-    <h3>hi <%= current_user['first_name'] %></h3>
+    <h3>hi <%= current_user['user_id'] %></h3>
     <% end %>
 </div>
 
@@ -29,14 +29,14 @@
     <section class="review">
         <div class="anime-details">
             <div class="text-details">
-                <div class="details">Name: </div>
-                <div class="details">Genres: </div>
-                <div class="details"># Eps: </div>
-                <div class="details">Year: </div>
+                <div class="details">Name: <%= anime_details(review['anime_id'], 'name') %></div>
+                <div class="details">Genres: <%= anime_details(review['anime_id'], 'genres') %></div>
+                <div class="details"># Eps: <%= anime_details(review['anime_id'], 'num_episodes') %></div>
+                <div class="details">Year: <%= anime_details(review['anime_id'], 'year') %></div>
                 
             </div>
             <div class="cover-image">
-                IMG goes here
+                <img src="<%= anime_details(review['anime_id'], 'image_url') %>" alt="">
             </div>
         </div>
         

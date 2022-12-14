@@ -6,12 +6,21 @@
 
     <nav>
         <ul>
-            <li><a href="/">Explore</a></li>
-            <li><a href="">Search</a></li>
-            <li><a href="/animes/new">Review</a></li>
-            <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-            <li><a href="/sessions/new">Log-in</a></li>
-            <li><a href="/users/new">Sign-up</a></li>
+            <% if !logged_in? %>
+                <li><a href="/">Explore</a></li>
+                <li><a href="/">Search</a></li>
+                <li><a href="/sessions/new">Log-in</a></li>
+                <li><a href="/users/new">Sign-up</a></li>
+            <% else %>
+                <li><a href="/">Explore</a></li>
+                <li><a href="">Search</a></li>
+                <li><a href="/animes/new">Review</a></li>
+                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
+                <form action="/sessions" method="POST">
+                    <input type="hidden" name="_method" value="delete">
+                    <button>Log out</button>
+                </form>
+            <% end  %>
         </ul>
     </nav>
 

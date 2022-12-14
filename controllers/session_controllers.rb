@@ -29,3 +29,8 @@ get '/sessions/:id/profile' do
         redirect 'sessions/new'
     end
 end
+
+delete '/sessions' do
+    session['user_id'] = nil
+    redirect '/'
+end

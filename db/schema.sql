@@ -38,3 +38,16 @@ CREATE TABLE likes(
 ALTER TABLE likes
 ADD CONSTRAINT unique_likes
 UNIQUE(user_id, anime_review_id);
+
+ALTER TABLE anime_reviews ADD COLUMN user_id INT;
+
+CREATE TABLE anime_db(
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  image_url TEXT,
+  genres TEXT,
+  synopsis TEXT, 
+  num_episodes INT,
+  episodes_watched INT,
+  year INT
+);

@@ -10,12 +10,18 @@
             <li><a href="">Search</a></li>
             <li><a href="/animes/new">Review</a></li>
             <li><a href="">Profile</a></li>
-            <li><a href="">Log-in</a></li>
-            <li><a href="">Sign-up</a></li>
+            <li><a href="/sessions/new">Log-in</a></li>
+            <li><a href="/users/new">Sign-up</a></li>
         </ul>
     </nav>
 
 </header>
+
+<div class="loginplaceholder">
+    <% if logged_in? %>
+    <h3>hi <%= current_user['first_name'] %></h3>
+    <% end %>
+</div>
 
 <main class="explore">
 

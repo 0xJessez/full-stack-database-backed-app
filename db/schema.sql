@@ -2,6 +2,7 @@ CREATE DATABASE anime_db;
 \c anime_db
 
 CREATE TABLE anime_reviews(
+  id SERIAL PRIMARY KEY,
   review_date DATE,
   episodes_watched INT,
   score INT,

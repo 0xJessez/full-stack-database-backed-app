@@ -25,13 +25,14 @@
 
 <main class="explore">
 
+    <% reviews.each do |review| %>
     <section class="review">
         <div class="anime-details">
             <div class="text-details">
-                <div class="details">Name </div>
-                <div class="details">Genres</div>
-                <div class="details"># Eps</div>
-                <div class="details">Year</div>
+                <div class="details">Name: </div>
+                <div class="details">Genres: </div>
+                <div class="details"># Eps: </div>
+                <div class="details">Year: </div>
                 
             </div>
             <div class="cover-image">
@@ -45,21 +46,22 @@
                 IMG goes here
                 </div>
                 <div class="review-user">
-                    <h5>username</h5>
-                    <h5>recommendation</h5>
+                    <h5>Username: <%= review_user(review['user_id']) %></h5>
+                    <h5>Recommendation: <%= review['score'] %></h5>
                 </div>
                 <div class="review-user2">
-                    <h5>date</h5>
-                    <h5>episodes watched</h5>
+                    <h5>Date: <%= review['review_date'] %></h5>
+                    <h5>Episodes watched: <%= review['episodes_watched'] %></h5>
                 </div>
             </div>
             <div class="review-text">
-                review text goes here
+                <%= review['user_review'] %>
             
             </div>
         
         </div>
 
     </section>
+    <% end %>
 
 </main>

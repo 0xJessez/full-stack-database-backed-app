@@ -1,5 +1,12 @@
 get '/' do
-    erb :'animes/index'
+    
+    reviews = all_reviews()
+    animes = all_anime()
+    
+    erb :'animes/index', locals: {
+        reviews: reviews,
+        animes: animes
+    }
 end
 
 get '/animes/new' do

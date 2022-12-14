@@ -1,3 +1,11 @@
+def all_reviews()
+    run_sql('SELECT * FROM anime_reviews ORDER BY user_id DESC')
+end
+
+def all_anime()
+    run_sql('SELECT * FROM anime_db ORDER BY id')
+end
+
 def find_anime_by_name(name)
     anime =  run_sql('SELECT * FROM anime_db WHERE name = $1', [name])
 

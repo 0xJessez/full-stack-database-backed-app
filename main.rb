@@ -19,6 +19,7 @@ require './controllers/session_controllers'
 
 # helpers
 require './helpers/sessions_helper'
+require './helpers/animes_helper'
 
 
 

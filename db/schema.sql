@@ -10,10 +10,10 @@ CREATE TABLE anime_reviews(
   user_id INT
 );
 
-INSERT INTO anime_reviews(episodes_watched, review_date, score, user_review, anime_id)
+INSERT INTO anime_reviews(episodes_watched, review_date, score, user_review, anime_id, user_id)
 VALUES
-    (18, '2022-12-14', 9, 'Incredible show even for those who don''t like sports', 1),
-    (25, '2022-12-13', 10, 'Masterpiece, would recommend to anyone looking for a sci-fi drama with incredible character development!', 2);
+    (18, '2022-12-14', 9, 'Incredible show even for those who don''t like sports', 1, 1),
+    (25, '2022-12-13', 10, 'Masterpiece, would recommend to anyone looking for a sci-fi drama with incredible character development!', 2, 1);
 
 CREATE TABLE users(
   id SERIAL PRIMARY KEY,

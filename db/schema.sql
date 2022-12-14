@@ -20,6 +20,7 @@ CREATE TABLE users(
   first_name TEXT,
   last_name TEXT,
   email TEXT,
+  username TEXT,
   image_url TEXT,
   password_digest TEXT
 );

@@ -8,6 +8,7 @@ require 'httparty'
 enable :sessions
 
 # models
+require './models/anime'
 require './models/user'
 
 # controllers

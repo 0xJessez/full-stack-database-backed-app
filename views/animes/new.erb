@@ -1,0 +1,57 @@
+<header>
+    <div class="main-heading">
+        <h1>AnimeList</h1>
+        <h3>Share, Discover</h3>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="/">Explore</a></li>
+            <li><a href="">Search</a></li>
+            <li><a href="/animes/new">Review</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="/sessions/new">Log-in</a></li>
+            <li><a href="/users/new">Sign-up</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<main>
+
+    <form action="/animes" method="POST">
+    
+    <label for="">Name</label>
+    <input type="text" name="name">
+    
+    <label for="">Image URL</label>
+    <input type="text" name="image_url">
+
+    <label for="">Genres</label>
+    <input type="text" name="genres">
+
+    <label for="">Synopsis</label>
+    <input type="text" name="synopsis">
+
+    <label for="">Number of episodes</label>
+    <input type="text" name="num_episodes">
+
+    <label for="">Year</label>
+    <input type="text" name="year">
+
+    <label for="">Review date YYYY-MM-DD</label>
+    <input type="text" name="review_date">
+
+    <label for="">Episodes watched</label>
+    <input type="text" name="episodes_watched">
+
+    <label for="">Score</label>
+    <input type="text" name="score">
+
+    <label for="">User review</label>
+    <input type="text" name="user_review">    
+
+    <button>Add review</button>
+    </form>
+
+</main>

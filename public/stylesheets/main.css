@@ -36,7 +36,20 @@ li a {
     justify-content: space-between;
 }
 
+.text-details {
+    width: 300px;
+}
+
 .review-header {
     display: grid;
     grid-template-columns: repeat(3, auto);
+}
+
+.cover-image img {
+    width: 225px;
+}
+
+.cover-image {
+
+    text-align: right;
 }

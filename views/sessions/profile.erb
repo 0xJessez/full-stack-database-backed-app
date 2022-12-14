@@ -20,18 +20,58 @@
 <main>
     <section class="user-info">
         <div class="pfp">
-        IMG here
+            <img src="<%= current_user['image_url'] %>" alt="">
         </div>
         <div class="user-details">
-            <h5>Username</h5>
-            <h5># reviews</h5>
-            <h5>Avg review score</h5>
+            <h5>Username: <%= current_user['username'] %></h5>
+            <h5># reviews: <%= count_reviews(current_user['id']) %></h5>
+            <h5>Avg review score: <%= avg_score(current_user['id']) %>/10</h5>
         </div>
     </section>
 
     <section class="user-reviews">
     
-    
+        <% reviews.each do |review| %>
+        <section class="review">
+            <div class="controls">
+                <a href="/animes/<%= review['id'] %>/edit">Edit</a>
+                <form action="/animes/<%= review['id'] %>" method="POST">
+                    <input type="hidden" name="_method" value="delete">
+                    <button>Delete</button>
+                </form>
+            </div>
+            <div class="anime-details">
+                <div class="text-details">
+                    <div class="details">Name: <%= anime_details(review['anime_id'], 'name') %></div>
+                    <div class="details">Genres: <%= anime_details(review['anime_id'], 'genres') %></div>
+                    <div class="details"># Eps: <%= anime_details(review['anime_id'], 'num_episodes') %></div>
+                    <div class="details">Year: <%= anime_details(review['anime_id'], 'year') %></div>
+                    
+                </div>
+                <div class="cover-image">
+                    <img src="<%= anime_details(review['anime_id'], 'image_url') %>" alt="">
+                </div>
+            </div>
+            
+            <div class="user-review">
+                <div class="review-header">
+                    <div class="review-user">
+                        <h5>Recommendation: <%= review['score'] %></h5>
+                    </div>
+                    <div class="review-user2">
+                        <h5>Date: <%= review['review_date'] %></h5>
+                        <h5>Episodes watched: <%= review['episodes_watched'] %></h5>
+                    </div>
+                </div>
+                <div class="review-text">
+                    <%= review['user_review'] %>
+                
+                </div>
+            
+            </div>
+
+        </section>
+        <% end %>
     
     
     </section>

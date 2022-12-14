@@ -19,7 +19,7 @@
 
 <div class="loginplaceholder">
     <% if logged_in? %>
-    <h3>hi <%= current_user['user_id'] %></h3>
+    <h3>hi <%= current_user['username'] %></h3>
     <% end %>
 </div>
 
@@ -43,10 +43,10 @@
         <div class="user-review">
             <div class="review-header">
                 <div class="review-pfp">
-                IMG goes here
+                    <img src="<%= user_details(review['user_id'], 'image_url') %>" alt="">
                 </div>
                 <div class="review-user">
-                    <h5>Username: <%= review_user(review['user_id']) %></h5>
+                    <h5><%= user_details(review['user_id'], 'username') %></h5>
                     <h5>Recommendation: <%= review['score'] %></h5>
                 </div>
                 <div class="review-user2">
@@ -65,3 +65,7 @@
     <% end %>
 
 </main>
+
+<footer>
+    <p>Copyright &copy; 2022 Jesse Zhang</p>
+</footer>

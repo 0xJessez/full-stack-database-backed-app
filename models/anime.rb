@@ -1,5 +1,5 @@
 def all_reviews()
-    run_sql('SELECT * FROM anime_reviews ORDER BY user_id DESC')
+    run_sql('SELECT * FROM anime_reviews ORDER BY review_date DESC')
 end
 
 def all_anime()
@@ -22,4 +22,24 @@ end
 
 def create_review(review_date, episodes_watched, score, user_review, user_id, anime_id)
     run_sql('INSERT INTO anime_reviews(review_date, episodes_watched, score, user_review, user_id, anime_id) VALUES($1, $2, $3, $4, $5, $6)', [review_date, episodes_watched, score, user_review, user_id, anime_id])
+end
+
+def find_reviews_by_id(user_id)
+    run_sql('SELECT * FROM anime_reviews WHERE user_id = $1 ORDER BY review_date DESC',[user_id])
+end
+
+def find_review_by_id(id)
+    run_sql('SELECT * FROM anime_reviews WHERE id = $1', [id])[0]
+end
+
+def find_anime_by_id(id)
+    run_sql('SELECT * FROM anime_db WHERE id = $1', [id])[0]
+end
+
+def update_review(id, review_date, episodes_watched, score, user_review)
+    run_sql('UPDATE anime_reviews SET review_date = $2, episodes_watched = $3, score = $4, user_review = $5 WHERE id = $1', [id, review_date, episodes_watched, score, user_review])
+end
+
+def delete_review(id)
+    run_sql('DELETE FROM anime_reviews WHERE id = $1', [id])
 end

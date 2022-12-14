@@ -1,0 +1,52 @@
+<header>
+    <div class="main-heading">
+        <h1>AnimeList</h1>
+        <h3>Share, Discover</h3>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="/">Explore</a></li>
+            <li><a href="">Search</a></li>
+            <li><a href="/animes/new">Review</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="/sessions/new">Log-in</a></li>
+            <li><a href="/users/new">Sign-up</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<main>
+
+    <form action="/animes/<%= review['id'] %>" method="POST">
+        <input type="hidden" name="_method" value="put">
+    
+        <label for="">Name: <%= anime['name'] %></label>
+        <br>
+        <label for="">Image URL: <%= anime['image_url'] %></label>
+        <br>
+        <label for="">Genres: <%= anime['genres'] %></label>
+        <br>
+        <label for="">Synopsis: <%= anime['synopsis'] %></label>
+        <br>
+        <label for="">Number of episodes: <%= anime['num_episodes'] %></label>
+        <br>
+        <label for="">Year: <%= anime['year'] %></label>
+        <br>
+        <label for="">Review date YYYY-MM-DD</label>
+        <input type="text" name="review_date" value="<%= review['review_date'] %>">
+        <br>
+        <label for="">Episodes watched</label>
+        <input type="text" name="episodes_watched" value="<%= review['episodes_watched'] %>">
+        <br>
+        <label for="">Score</label>
+        <input type="text" name="score" value="<%= review['score'] %>">
+        <br>
+        <label for="">User review</label>
+        <input type="text" name="user_review" value="<%= review['user_review'] %>">    
+        <br>
+        <button>Update review</button>
+    </form>
+
+</main>

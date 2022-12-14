@@ -46,3 +46,32 @@ post '/animes' do
         redirect '/sessions/new'
     end
 end
+
+get '/animes/:id/edit' do
+    id = params['id']
+
+    review = find_review_by_id(id)
+    anime = find_anime_by_id(review['anime_id'])
+
+    erb :'animes/edit', locals: {
+        review: review,
+        anime: anime
+    }
+end
+
+put '/animes/:id' do
+    id = params['id']
+    review_date = params['review_date']
+    episodes_watched = params['episodes_watched']
+    score = params['score']
+    user_review = params['user_review']
+
+    update_review(id, review_date, episodes_watched, score, user_review)
+    redirect '/'
+end
+
+delete '/animes/:id' do
+    id = params['id']
+    delete_review(id)
+    redirect '/'
+end

@@ -17,8 +17,14 @@ post '/sessions' do
 end
 
 get '/sessions/:id/profile' do
+    
+    user_id = params['id']
+    reviews = find_reviews_by_id(user_id)
+    
     if logged_in?
-        erb :'sessions/profile'
+        erb :'sessions/profile', locals: {
+            reviews: reviews
+        }
     else
         redirect 'sessions/new'
     end

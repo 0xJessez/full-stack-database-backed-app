@@ -7,9 +7,10 @@ post '/users' do
     last_name = params['last_name']
     email = params['email']
     image_url = params['image_url']
+    username = params['username']
     password = params['password']
 
-    create_user(first_name, last_name, email, image_url, password)
+    create_user(first_name, last_name, email, image_url, username, password)
 
     redirect '/'
 end

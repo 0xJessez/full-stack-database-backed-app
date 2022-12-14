@@ -15,3 +15,11 @@ post '/sessions' do
         erb :'sessons/new'
     end
 end
+
+get '/sessions/:id/profile' do
+    if logged_in?
+        erb :'sessions/profile'
+    else
+        redirect 'sessions/new'
+    end
+end

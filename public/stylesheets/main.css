@@ -4,5 +4,39 @@
 }
 
 body {
-    background-color: rgb(208, 208, 255);
+    max-width: 1100px;
+    margin: 0 auto;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background-color: #294062;
+}
+
+li {
+    list-style-type: none;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+}
+
+.explore {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.anime-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-header {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
 }

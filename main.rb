@@ -9,14 +9,11 @@ require 'httparty'
 # models
 
 # controllers
+require './controllers/anime_controllers'
+
 
 # helpers
 
-
-
-get '/' do
-  erb :index
-end
 
 
 

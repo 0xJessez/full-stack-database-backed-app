@@ -13,8 +13,7 @@
                 <li><a href="/users/new">Sign-up</a></li>
             <% else %>
                 <li><a href="/">Explore</a></li>
-                <li><a href="">Search</a></li>
-                <li><a href="/animes/new">Review</a></li>
+                <li><a href="/animes/search">Search</a></li>
                 <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
                 <form action="/sessions" method="POST">
                     <input type="hidden" name="_method" value="delete">

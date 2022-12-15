@@ -10,8 +10,35 @@ get '/' do
 end
 
 get '/animes/new' do
+    anime_id = params['anime_id']
+    
+    headers = { 
+        "X-MAL-CLIENT-ID"  => ENV['MAL_CLIENT_ID'] 
+    }
+    
+    if anime_id != nil
+        anime_data = HTTParty.get("https://api.myanimelist.net/v2/anime/#{anime_id}?fields=title,main_picture,genres,synopsis,num_episodes,start_date", :headers => headers).parsed_response
+    else
+        nil
+    end
+
+
+    if anime_id != nil
+        genres = ""
+        anime_data['genres'].each do |genre|
+            genre.each do |k, v|
+                if k == "name"
+                    genres += "#{v}, "
+                end
+            end
+        end
+    end
+
     if logged_in?
-        erb :'animes/new'
+        erb :'animes/new', locals: {
+            anime_data: anime_data,
+            genres: genres
+        }
     else
         redirect '/'
     end
@@ -21,7 +48,7 @@ post '/animes' do
     name = params['name']
     image_url = params['image_url']
     genres = params['genres']
-    synposis = params['synopsis']
+    synopsis = params['synopsis']
     num_episodes = params['num_episodes']
     episodes_watched = params['episodes_watched']
     year = params['year']

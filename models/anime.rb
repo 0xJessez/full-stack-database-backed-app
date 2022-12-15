@@ -17,7 +17,7 @@ def find_anime_by_name(name)
 end
 
 def add_anime_to_db(name, image_url, genres, synopsis, num_episodes, year)
-    run_sql('INSERT INTO anime_db(name, image_url, genres, synopsis, num_episodes, year) VALUES($1, $2, $3, $4, $5, $6, $7)', [name, image_url, genres, synopsis, num_episodes, year])
+    run_sql('INSERT INTO anime_db(name, image_url, genres, synopsis, num_episodes, year) VALUES($1, $2, $3, $4, $5, $6)', [name, image_url, genres, synopsis, num_episodes, year])
 end
 
 def create_review(review_date, episodes_watched, score, user_review, user_id, anime_id)

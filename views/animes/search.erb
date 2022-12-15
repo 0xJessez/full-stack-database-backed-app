@@ -7,28 +7,36 @@
     <nav>
         <ul>
             <% if !logged_in? %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/new">Log-in</a></li>
-                <li><a href="/users/new">Sign-up</a></li>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <li><a class="regular-link" href="/sessions/new">Log-in</a></li>
+                <li ><a class="highlighted-link" href="/users/new">Sign-up</a></li>
             <% else %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-                <form action="/sessions" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <button>Log out</button>
-                </form>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <div class="dropdown">
+                    <li><a class="highlighted-link"><%= current_user['username'] %></a></li>
+                    <div class="dropdown-content">
+                        <div class="dropbtn">
+                            <a href="/sessions/<%= session['user_id'] %>/profile">Profile</a>
+                        </div>
+                        <div class="dropbtn">
+                            <form action="/sessions" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button>Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             <% end %>
         </ul>
     </nav>
-
 </header>
 
-<main>
+<main class="search">
     <form action="/animes/search">
         <label for="">Name:</label>
-        <input type="text" name="name">
+        <input type="text" name="name" value size="50" maxlength="50">
         <button>search</button>
     </form>
 
@@ -41,14 +49,19 @@
     <% elsif anime_search == nil && anime_data['title'] == nil %>
         <div>Search for something above</div>
     <% else  %>
-        <a href="/animes/new?anime_id=<%= anime_data['id'] %>">Add review</a>
+        <div class="add-review">
+            <a href="/animes/new?anime_id=<%= anime_data['id'] %>">Add review</a>
+        </div>
         <div class="anime-profile">
+            <div class="anime-profile-right">
+                <img src="<%= anime_data['main_picture']['large'] %>" alt="">
+            </div>
             <div class="anime-profile-left">
                 <div class="anime-profile-text">
-                    Name: <%= anime_data['title'] %>
+                    <span class="dark-text">Name: </span><%= anime_data['title'] %>
                 </div>
                 <div class="anime-profile-text">
-                    Genres: 
+                    <span class="dark-text">Genres: </span> 
                     <% anime_data['genres'].each do |genre| %>
                         <% genre.each do |k, v| %>
                             <% if k == "name" %>
@@ -58,17 +71,14 @@
                     <% end %>
                 </div>
                 <div class="anime-profile-text">
-                    Synopsis: <%= anime_data['synopsis'] %>
+                    <span class="dark-text">Synposis: </span><%= anime_data['synopsis'] %>
                 </div>
                 <div class="anime-profile-text">
-                    Number of episodes: <%= anime_data['num_episodes'] %>
+                    <span class="dark-text">Number of episodes: </span><%= anime_data['num_episodes'] %>
                 </div>
                 <div class="anime-profile-text">
-                    Year aired: <%= anime_data['start_date'] %>
+                    <span class="dark-text">Date aired: </span><%= anime_data['start_date'] %>
                 </div>
-            </div>
-            <div class="anime-profile-right">
-                <img src="<%= anime_data['main_picture']['large'] %>" alt="">
             </div>
         </div>
     <% end %>

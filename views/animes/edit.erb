@@ -7,18 +7,28 @@
     <nav>
         <ul>
             <% if !logged_in? %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/new">Log-in</a></li>
-                <li><a href="/users/new">Sign-up</a></li>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <li><a class="regular-link" href="/sessions/new">Log-in</a></li>
+                <li ><a class="highlighted-link" href="/users/new">Sign-up</a></li>
             <% else %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-                <form action="/sessions" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <button>Log out</button>
-                </form>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <div class="dropdown">
+                    <li><a class="highlighted-link"><%= current_user['username'] %></a></li>
+                    <div class="dropdown-content">
+                        <div class="dropbtn">
+                            <a href="/sessions/<%= session['user_id'] %>/profile">Profile</a>
+                        </div>
+                        <div class="dropbtn">
+                            <form action="/sessions" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button>Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
             <% end %>
         </ul>
     </nav>

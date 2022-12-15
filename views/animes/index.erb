@@ -7,28 +7,36 @@
     <nav>
         <ul>
             <% if !logged_in? %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/new">Log-in</a></li>
-                <li><a href="/users/new">Sign-up</a></li>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <li><a class="regular-link" href="/sessions/new">Log-in</a></li>
+                <li ><a class="highlighted-link" href="/users/new">Sign-up</a></li>
             <% else %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-                <form action="/sessions" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <button>Log out</button>
-                </form>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <div class="dropdown">
+                    <li><a class="highlighted-link"><%= current_user['username'] %></a></li>
+                    <div class="dropdown-content">
+                        <div class="dropbtn">
+                            <a href="/sessions/<%= session['user_id'] %>/profile">Profile</a>
+                        </div>
+                        <div class="dropbtn">
+                            <form action="/sessions" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button>Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
             <% end %>
         </ul>
     </nav>
 
 </header>
 
-<div class="loginplaceholder">
-    <% if logged_in? %>
-    <h3>hi <%= current_user['username'] %></h3>
-    <% end %>
+<div class="welcome">
+Explore recent reviews
 </div>
 
 <main class="explore">
@@ -37,10 +45,10 @@
     <section class="review">
         <div class="anime-details">
             <div class="text-details">
-                <div class="details">Name: <%= anime_details(review['anime_id'], 'name') %></div>
-                <div class="details">Genres: <%= anime_details(review['anime_id'], 'genres') %></div>
-                <div class="details"># Eps: <%= anime_details(review['anime_id'], 'num_episodes') %></div>
-                <div class="details">Year: <%= anime_details(review['anime_id'], 'year') %></div>
+                <div class="details"><span class="dark-text">Name: </span><%= anime_details(review['anime_id'], 'name') %></div>
+                <div class="details"><span class="dark-text">Genres: </span><%= anime_details(review['anime_id'], 'genres') %></div>
+                <div class="details"><span class="dark-text"># Eps </span><%= anime_details(review['anime_id'], 'num_episodes') %></div>
+                <div class="details"><span class="dark-text">Year: </span><%= anime_details(review['anime_id'], 'year') %></div>
                 
             </div>
             <div class="cover-image">
@@ -69,9 +77,8 @@
                 </div>
                 <div class="likes">
                     <form action="/animes/<%= review['id'] %>/likes" method="POST">
-                        <button>Like</button>
+                        <button>Likes <%= likes_count(review['id']) %></button>
                     </form>
-                    <div class="like-count"><%= likes_count(review['id']) %></div>
                 </div>
             </div>
         

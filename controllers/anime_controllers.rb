@@ -40,7 +40,7 @@ get '/animes/new' do
             genres: genres
         }
     else
-        redirect '/'
+        redirect '/sessions/new'
     end
 end
 
@@ -123,8 +123,9 @@ get '/animes/search' do
     headers = { 
         "X-MAL-CLIENT-ID"  => ENV['MAL_CLIENT_ID'] 
     }
-
+    
     anime_search = HTTParty.get("https://api.myanimelist.net/v2/anime?q=#{name}&limit=10", :headers => headers).parsed_response['data']
+    
     anime_data = HTTParty.get("https://api.myanimelist.net/v2/anime/#{anime_id}?fields=title,main_picture,genres,synopsis,num_episodes,start_date", :headers => headers).parsed_response
 
     erb :'animes/search', locals: {

@@ -7,48 +7,59 @@
     <nav>
         <ul>
             <% if !logged_in? %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/">Search</a></li>
-                <li><a href="/sessions/new">Log-in</a></li>
-                <li><a href="/users/new">Sign-up</a></li>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <li><a class="regular-link" href="/sessions/new">Log-in</a></li>
+                <li ><a class="highlighted-link" href="/users/new">Sign-up</a></li>
             <% else %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="">Search</a></li>
-                <li><a href="/animes/new">Review</a></li>
-                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-                <form action="/sessions" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <button>Log out</button>
-                </form>
-            <% end  %>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <div class="dropdown">
+                    <li><a class="highlighted-link"><%= current_user['username'] %></a></li>
+                    <div class="dropdown-content">
+                        <div class="dropbtn">
+                            <a href="/sessions/<%= session['user_id'] %>/profile">Profile</a>
+                        </div>
+                        <div class="dropbtn">
+                            <form action="/sessions" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button>Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            <% end %>
         </ul>
     </nav>
 
 </header>
 
-<main>
+<main class="sign-up">
 
-    <form action="/users" method="POST">
-    <label for="">First name</label>
-    <input type="text" name="first_name">
-    
-    <label for="">Last name</label>
-    <input type="text" name="last_name">
+    <div class="sign-up-box">
+        <form action="/users" method="POST">
+            <label for="">First name</label>
+            <input type="text" name="first_name" value size="30" maxlength="50">
+            
+            <label for="">Last name</label>
+            <input type="text" name="last_name" value size="30" maxlength="50">
 
-    <label for="">Email</label>
-    <input type="text" name="email">
+            <label for="">Email</label>
+            <input type="text" name="email" value size="30" maxlength="50">
 
-    <label for="">Profile picture</label>
-    <input type="text" name="image_url">
+            <label for="">Profile picture</label>
+            <input type="text" name="image_url" value size="30" maxlength="50">
 
-    <label for="">Username</label>
-    <input type="text" name="username">
+            <label for="">Username</label>
+            <input type="text" name="username" value size="30" maxlength="50">
 
-    <label for="">Password</label>
-    <input type="password" name="password">
-
-    <button>Sign-up</button>
-    </form>
+            <label for="">Password</label>
+            <input type="password" name="password" value size="30" maxlength="50">
+            <br>
+            <button>Sign-up</button>
+        </form>
+    <div>
 
     
 </main>

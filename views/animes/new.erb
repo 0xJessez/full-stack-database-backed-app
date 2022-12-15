@@ -7,58 +7,68 @@
     <nav>
         <ul>
             <% if !logged_in? %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/new">Log-in</a></li>
-                <li><a href="/users/new">Sign-up</a></li>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <li><a class="regular-link" href="/sessions/new">Log-in</a></li>
+                <li ><a class="highlighted-link" href="/users/new">Sign-up</a></li>
             <% else %>
-                <li><a href="/">Explore</a></li>
-                <li><a href="/animes/search">Search</a></li>
-                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
-                <form action="/sessions" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <button>Log out</button>
-                </form>
+                <li><a class="regular-link" href="/">Explore</a></li>
+                <li><a class="regular-link" href="/animes/search">Search</a></li>
+                <div class="dropdown">
+                    <li><a class="highlighted-link"><%= current_user['username'] %></a></li>
+                    <div class="dropdown-content">
+                        <div class="dropbtn">
+                            <a href="/sessions/<%= session['user_id'] %>/profile">Profile</a>
+                        </div>
+                        <div class="dropbtn">
+                            <form action="/sessions" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button>Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
             <% end %>
         </ul>
     </nav>
 
 </header>
 
-<main>
+<main class="new-review">
     <% if anime_data != nil %>
         <form action="/animes" method="POST">
         
             <label for="">Name</label>
-            <input type="text" name="name" value="<%= anime_data['title'] %>">
-            <br>
+            <input type="text" name="name" value="<%= anime_data['title'] %>" value size="50" maxlength="50">
+            
             <label for="">Image URL</label>
-            <input type="text" name="image_url" value="<%= anime_data['main_picture']['large'] %>">
-            <br>
+            <input type="text" name="image_url" value="<%= anime_data['main_picture']['large'] %>" value size="50">
+            
             <label for="">Genres</label>
-            <input type="text" name="genres" value="<%= genres %>">
-            <br>
+            <input type="text" name="genres" value="<%= genres %>" value size="50" maxlength="50">
+            
             <label for="">Synopsis</label>
-            <input type="text" name="synopsis" value="<%= anime_data['synopsis'] %>">
-            <br>
+            <input type="text" name="synopsis" value="<%= anime_data['synopsis'] %>" value size="50">
+            
             <label for="">Number of episodes</label>
-            <input type="text" name="num_episodes" value="<%= anime_data['num_episodes'] %>">
-            <br>
+            <input type="text" name="num_episodes" value="<%= anime_data['num_episodes'] %>" value size="50" maxlength="50">
+            
             <label for="">Year</label>
-            <input type="text" name="year" value="<%= anime_data['start_date'][0,4] %>">
+            <input type="text" name="year" value="<%= anime_data['start_date'][0,4] %>" value size="50" maxlength="50">
             <br>
             <label for="">Review date YYYY-MM-DD</label>
-            <input type="text" name="review_date">
-            <br>
+            <input type="text" name="review_date" value size="50" maxlength="50">
+            
             <label for="">Episodes watched</label>
-            <input type="text" name="episodes_watched">
-            <br>
+            <input type="text" name="episodes_watched" value size="50" maxlength="50">
+            
             <label for="">Score</label>
-            <input type="text" name="score">
-            <br>
+            <input type="text" name="score" value size="50" maxlength="50">
+            
             <label for="">User review</label>
-            <input type="text" name="user_review">    
-            <br>
+            <textarea name="user_review" id="" cols="50" rows="10"></textarea>
+
             <button>Add review</button>
         </form>
     <% else %>

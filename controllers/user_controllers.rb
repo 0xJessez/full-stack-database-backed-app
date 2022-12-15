@@ -10,7 +10,10 @@ post '/users' do
     username = params['username']
     password = params['password']
 
-    create_user(first_name, last_name, email, image_url, username, password)
-
-    redirect '/'
+    if email != "" && username != "" && password != ""
+        create_user(first_name, last_name, email, image_url, username, password)
+        redirect '/'
+    else
+        redirect '/users/new'
+    end
 end

@@ -9,6 +9,8 @@ body {
     font-family: 'JetBrains Mono', monospace;
 }
 
+/* HEADER */
+
 header {
     display: flex;
     justify-content: space-between;
@@ -20,16 +22,20 @@ li {
     list-style-type: none;
 }
 
-li a {
+nav ul li a {
     text-decoration: none;
     color: white;
 }
+
+/* EXPLORE */
 
 .explore {
     max-width: 600px;
     margin: 0 auto;
     margin-top: 1rem;
 }
+
+/* EXPLORE PAGE REVIEWS */
 
 .anime-details {
     display: flex;
@@ -52,4 +58,12 @@ li a {
 .cover-image {
 
     text-align: right;
+}
+
+.review-text {
+    height: 200px;
+}
+
+.review-pfp img {
+    max-height: 125px;
 }

@@ -43,3 +43,11 @@ end
 def delete_review(id)
     run_sql('DELETE FROM anime_reviews WHERE id = $1', [id])
 end
+
+def add_like(anime_review_id, user_id)
+    if run_sql('SELECT * FROM likes WHERE anime_review_id = $1 AND user_id = $2', [anime_review_id, user_id]).to_a.count > 0
+        nil
+    else
+        run_sql('INSERT INTO likes(anime_review_id, user_id) VALUES($1, $2)', [anime_review_id, user_id])
+    end
+end

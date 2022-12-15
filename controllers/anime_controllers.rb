@@ -75,3 +75,33 @@ delete '/animes/:id' do
     delete_review(id)
     redirect '/'
 end
+
+post '/animes/:id/likes' do
+    anime_review_id = params['id']
+    user_id = session['user_id']
+
+    if logged_in?
+        add_like(anime_review_id, user_id)
+        redirect '/'
+    else
+        redirect '/sessions/new'
+    end
+
+end
+
+get '/animes/search' do
+    name = params['name']
+    anime_id = params['anime_id']
+
+    headers = { 
+        "X-MAL-CLIENT-ID"  => ENV['MAL_CLIENT_ID'] 
+    }
+
+    anime_search = HTTParty.get("https://api.myanimelist.net/v2/anime?q=#{name}&limit=10", :headers => headers).parsed_response['data']
+    anime_data = HTTParty.get("https://api.myanimelist.net/v2/anime/#{anime_id}?fields=title,main_picture,genres,synopsis,num_episodes,start_date", :headers => headers).parsed_response
+
+    erb :'animes/search', locals: {
+        anime_search: anime_search,
+        anime_data: anime_data
+    }
+end

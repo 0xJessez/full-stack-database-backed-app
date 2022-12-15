@@ -9,9 +9,21 @@ def anime_details(anime_id, detail)
 end
 
 def count_reviews(user_id)
-    run_sql(' SELECT user_id, COUNT(*) FROM anime_reviews WHERE user_id = $1 GROUP BY user_id;', [user_id])[0]['count']
+    if run_sql('SELECT user_id, COUNT(*) FROM anime_reviews WHERE user_id = $1 GROUP BY user_id', [user_id]).to_a.count > 0
+        run_sql('SELECT user_id, COUNT(*) FROM anime_reviews WHERE user_id = $1 GROUP BY user_id', [user_id])[0]['count']
+    else
+        nil
+    end
 end
 
 def avg_score(user_id)
     run_sql('SELECT AVG(score) FROM anime_reviews WHERE user_id = $1', [user_id])[0]['avg'].to_f
+end
+
+def likes_count(anime_review_id)
+    if run_sql('SELECT anime_review_id, COUNT(*) FROM likes WHERE anime_review_id = $1 GROUP BY anime_review_id', [anime_review_id]).to_a.count > 0
+        run_sql('SELECT anime_review_id, COUNT(*) FROM likes WHERE anime_review_id = $1 GROUP BY anime_review_id', [anime_review_id])[0]['count']
+    else
+        0
+    end
 end

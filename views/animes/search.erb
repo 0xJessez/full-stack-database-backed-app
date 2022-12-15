@@ -1,0 +1,76 @@
+<header>
+    <div class="main-heading">
+        <h1>AnimeList</h1>
+        <h3>Share, Discover</h3>
+    </div>
+
+    <nav>
+        <ul>
+            <% if !logged_in? %>
+                <li><a href="/">Explore</a></li>
+                <li><a href="/">Search</a></li>
+                <li><a href="/sessions/new">Log-in</a></li>
+                <li><a href="/users/new">Sign-up</a></li>
+            <% else %>
+                <li><a href="/">Explore</a></li>
+                <li><a href="">Search</a></li>
+                <li><a href="/animes/new">Review</a></li>
+                <li><a href="/sessions/<%= session['user_id'] %>/profile">Profile</a></li>
+                <form action="/sessions" method="POST">
+                    <input type="hidden" name="_method" value="delete">
+                    <button>Log out</button>
+                </form>
+            <% end %>
+        </ul>
+    </nav>
+
+</header>
+
+<main>
+    <form action="/animes/search">
+        <label for="">Name:</label>
+        <input type="text" name="name">
+        <button>search</button>
+    </form>
+
+    <% if anime_search != nil %>
+        <ul class="anime-list">
+            <% anime_search.each do |anime| %>
+                <li><a href="/animes/search?anime_id=<%= anime['node']['id'] %>"><%= anime['node']['title'] %></a></li>
+            <% end %>
+        </ul>
+    <% elsif anime_search == nil && anime_data['title'] == nil %>
+        <div>Search for something above</div>
+    <% else  %>
+        <div class="anime-profile">
+            <div class="anime-profile-left">
+                <div class="anime-profile-text">
+                    Name: <%= anime_data['title'] %>
+                </div>
+                <div class="anime-profile-text">
+                    Genres: 
+                    <% anime_data['genres'].each do |genre| %>
+                        <% genre.each do |k, v| %>
+                            <% if k == "name" %>
+                                <%= v %>,
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="anime-profile-text">
+                    Synopsis: <%= anime_data['synopsis'] %>
+                </div>
+                <div class="anime-profile-text">
+                    Number of episodes: <%= anime_data['num_episodes'] %>
+                </div>
+                <div class="anime-profile-text">
+                    Year aired: <%= anime_data['start_date'] %>
+                </div>
+            </div>
+            <div class="anime-profile-right">
+                <img src="<%= anime_data['main_picture']['large'] %>" alt="">
+            </div>
+        </div>
+    <% end %>
+
+</main>

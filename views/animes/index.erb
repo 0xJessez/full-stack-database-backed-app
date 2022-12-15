@@ -8,7 +8,7 @@
         <ul>
             <% if !logged_in? %>
                 <li><a href="/">Explore</a></li>
-                <li><a href="/">Search</a></li>
+                <li><a href="/animes/search">Search</a></li>
                 <li><a href="/sessions/new">Log-in</a></li>
                 <li><a href="/users/new">Sign-up</a></li>
             <% else %>
@@ -20,7 +20,7 @@
                     <input type="hidden" name="_method" value="delete">
                     <button>Log out</button>
                 </form>
-            <% end  %>
+            <% end %>
         </ul>
     </nav>
 
@@ -63,9 +63,17 @@
                     <h5>Episodes watched: <%= review['episodes_watched'] %></h5>
                 </div>
             </div>
-            <div class="review-text">
-                <%= review['user_review'] %>
             
+            <div class="review-main">
+                <div class="review-text">
+                    <%= review['user_review'] %>
+                </div>
+                <div class="likes">
+                    <form action="/animes/<%= review['id'] %>/likes" method="POST">
+                        <button>Like</button>
+                    </form>
+                    <div class="like-count"><%= likes_count(review['id']) %></div>
+                </div>
             </div>
         
         </div>

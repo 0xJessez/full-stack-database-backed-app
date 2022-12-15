@@ -50,3 +50,7 @@ INSERT INTO anime_db(name, image_url, genres, synopsis, num_episodes, year)
 VALUES
     ('Haikyuu!!', 'https://cdn.myanimelist.net/images/anime/4/60431l.jpg', 'Sports', 'enter synopsis here', 25, 2014),
     ('Code Geass: Hangyaku no Lelouch', 'https://cdn.myanimelist.net/images/anime/5/50331.jpg', 'Action, Drama, Sci-Fi', 'enter synopsis here', 25, 2006);
+
+INSERT INTO users(first_name, last_name, email, username)
+VALUES
+    ('seed', 'seed', 'seed@email.com', 'seed');
